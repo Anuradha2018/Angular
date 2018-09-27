@@ -1,1 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css']
+})
+export class AppComponent {
+  title = 'Tour of Heroes';
