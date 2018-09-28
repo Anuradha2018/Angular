@@ -9,8 +9,7 @@ export class ProfileService {
   profile: Profile;
   constructor() { }
   getProfile(): Observable<Profile> {
-    this.profile.comapny = 'RR';
-    this.profile.name = 'Anu';
+    this.profile = {name : 'ANISH', comapny: 'AMAZON' };
     return of(this.profile);
-  }
+    }
 }
