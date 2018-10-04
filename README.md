@@ -146,6 +146,67 @@ let howard = new Employee("Howard", "Sales");
 console.log(howard.getElevatorPitch());
 
 Snippet 4:
+/*abstract class Abcd {
+
+    show() {
+        console.log('xyz');
+    }
+    abstract display();
+}
+class Xyz extends Abcd {
+   
+     display(){
+        console.log('abcd');
+     }
+}
+let x = new Xyz();
+x.display();
+x.show();*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*interface Abcd {
+    name: string;
+    display(length: number, breadth: number);
+    show();
+}
+interface Xyz {
+    rank: number;
+}
+
+class Square implements Abcd, Xyz {
+    name: string;
+    rank: number;
+    display (length: number, breadth: number) {
+        console.log(`abcd`)
+    }
+    show(){
+
+    }
+}*/
+
 
 
 
