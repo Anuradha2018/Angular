@@ -164,6 +164,62 @@ x.display();
 x.show();*/
 
 
+Snippet6:
+class Shape {
+    name: string;
+    constructor(n){
+        this.name = n;
+    }
+    display() {
+        console.log(this.name);
+        
+    }
+}
+class Rectangle extends Shape {
+    length: number;
+    breadth: number;
+    constructor(l,b){
+        super('Rectangle')
+        this.length = l;
+        this.breadth = b;
+    }
+    display() {
+        console.log('I am a Rectangle')
+    }
+    
+}
+class MessageService {
+    static message;
+    name: string = 'abcd';
+    constructor (message, name){
+        MessageService.message = message;
+        this.name = name;
+    }
+    showMessage() {
+        console.log(`my message is ${MessageService.message}`);
+    }
+}
+let msg = new MessageService('message123', 'xyz');
+console.log(msg.name);//xyz
+msg.showMessage();//my message is message123
+let message = new MessageService('abcdefgh', 'xyzbc');
+console.log(message.name);//xyzbc
+message.showMessage();//my mssage is abcdefgh
+msg.showMessage();//my message is message123
+/*
+let rect = new Rectangle(2,1);
+console.log(rect.breadth);
+console.log(rect.length)
+console.log(rect.name);
+rect.display();
+
+let shape : Shape = rect;
+shape.display();
+let shape2 : Shape = new Shape('Shape');
+shape2.display();
+*/
+
+
 
 
 
