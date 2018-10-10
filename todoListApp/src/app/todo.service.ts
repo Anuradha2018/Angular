@@ -12,9 +12,11 @@ const httpOptions = {
 })
 export class TodoService {
 
-  constructor(
-    private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
     getTodo(): Observable<Todo[]> {
       return this.http.get<Todo[]>('/api/data.json');
       }
+      /*addItem (item: Todo): Observable<Todo> {
+        return this.http.post<Todo>('/api/data.json', item, httpOptions);
+      }*/
 }
