@@ -15,6 +15,4 @@ export class TodoService {
   constructor(private http: HttpClient) { }
     getTodo(): Observable<Todo[]> {
       return this.http.get<Todo[]>('/api/data.json');
-      }
-     
-}
+      } }
