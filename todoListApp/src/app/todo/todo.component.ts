@@ -1,5 +1,4 @@
 import { TodoService } from './../todo.service';
-
 import { Component, OnInit } from '@angular/core';
 import { Todo } from '../todo';
 
@@ -20,11 +19,5 @@ export class TodoComponent implements OnInit {
     this.todoService.getTodo()
     .subscribe(items => this.items = items);
   }
-  /*addItem(item: Todo): void {
-    this.todoService.addItem(item)
-      .subscribe(items => {
-        this.items.push(item);
-      });
-  }*/
 
 }
