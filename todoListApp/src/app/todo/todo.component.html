@@ -1,6 +1,15 @@
-<ul *ngFor="let item of items" class="col-1-4" routerLink="/todo">
-      <h4>{{item.title}}</h4>
-      <h5>{{item.completed}}</h5>
-      <h5>{{item.createdOn}}</h5>
-  </ul>
-
+  <table class= "common">
+    <tr>
+      <th>Title</th>
+      <th>Status</th>
+      <th>Created on</th>
+    </tr>
+  </table>
+  <table *ngFor="let item of items" class="common" routerLink="/todo">
+    
+    <tr>
+      <td>{{item.title}}</td>
+      <td>{{item.completed}}</td>
+      <td>{{item.createdOn}}</td>
+    </tr>
+  </table>
