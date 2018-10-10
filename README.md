@@ -1,271 +1,37 @@
 # Angular
-learning Angular : Implementing basics such as Creating Angular components,data binding,Binding component methods to user events etc
+OVERVIEW <br>
+MODULES<br>
+The basic building blocks of an Angular application are NgModules, which provide a compilation context for components.
+an Angular app is defined by a set of NgModules.
+Both components and services are simply classes, with decorators
+The metadata for a component class associates it with a template that defines a view.
+The metadata for a service class provides the information Angular needs to make it available to components through dependency injection (DI).<br>
 
+COMPONENTS<br>
+Every Angular application has at least one component, the root component
+The @Component() decorator identifies the class immediately below it as a component, and provides the template and related component-specific metadata.
+ Angular defines a number of decorators that attach specific kinds of metadata to classes, so that the system knows what those classes mean and how they should work.<br>
+ 
+ TEMPLATES, DIRECTIVES AND DATA BINDING<br>
+ A template combines HTML with Angular markup 
+ Template directives provide program logic, and binding markup connects your application data and the DOM.
+ 2 types of binding:
+  1.Event binding lets your app respond to user input in the target environment by updating your application data.
+  2.Property binding lets you interpolate values that are computed from your application data into the HTML.
+  Angular supports two-way data binding, meaning that changes in the DOM, such as user choices, are also reflected in your program data.<br>
+  
+  SERVICES AND DEPENDENCY INJECTION<br>
+  For data or logic that isn't associated with a specific view, and that you want to share across components, you create a service class.
+  A service class definition is immediately preceded by the @Injectable() decorator.
+  Dependency injection (DI) lets you keep your component classes lean and efficient. They don't fetch data from the server, validate user input, or log directly to the console; they delegate such tasks to services.<br>
+  
+  ROUTING<br>
+  The Angular Router NgModule provides a service that lets you define a navigation path among the different application states and view hierarchies in your app.
+To define navigation rules, you associate navigation paths with your components. A path uses a URL-like syntax that integrates your program data
+<br>
+MODULES <br>
+Angular apps are modular and Angular has its own modularity system called NgModules. 
+NgModules are containers for a cohesive block of code dedicated to an application domain, a workflow, or a closely related set of capabilities.
+Every Angular app has at least one NgModule class, the root module, which is conventionally named AppModule and resides in a file named app.module.ts. You launch your app by bootstrapping the root NgModule.
 
-Study notes on Interfaces:
-
-When we use a normal function for Ex.
-Snippet 1:
-function printLabel(labelledObj: {label: string}){
-    console.log(labelledObj.label);
-}
-let myObj = { size: 10, label: "Size 10 Object"};// Even though we have passed one more property i.e size: 10 its going to workbecause the required parameter has been passed. The output is: Size 10 Object
-printLabel(myObj);
-
-But when it comes to Interface:
-Snippet 2:
-interface LabelledValue {
-    label: string; // is used to describe the requirements
-}
-function printLabel(labelledObj: LabelledValue) {
-    console.log(labelledObj.label);// we need not say that the obj we are passing implements the interface Labelledvalue.
-Shape matters.
-}Objects that we pass to the function meets the requirements listed 
-let myObj = {size: 10, label: "Size 10 Object"};
-printLabel(myObj);
-
-Optional Properties : Case
-Snippet 1:
-interface SquareConfig {
-    color?: string;
-    width?: number;
-}
-function createSquare(config:SquareConfig): { color: string; area: number} {
-    let newSquare = { color:"white", area: 100};
-    if(config.color) {
-        newSquare.color = config.color;//If config.clor- will give error that clor doesnot exist in SquareConfig.
-    }
-    if(config.width){
-        newSquare.area = config.width * config.width;
-    }
-    return newSquare;
-}
-let mySquare = createSquare({color: "black"}); 
-console.log(mySquare);
-
-Snippet 2:
-interface SquareConfig { color?: string; width?: number; } 
-function createSquare(config:SquareConfig): { color: string; area: number} { 
-    let newSquare = { color:"white", area: 100}; 
-    if(config.color) {
-         newSquare.color = config.color;//If config.clor- will give error that clor doesnot exist in SquareConfig.
-         } if(config.width){ newSquare.area = config.width * config.width; } return newSquare; }
-let mySquare = createSquare({ colour: "red", width: 100 });//colour is not assigned to SquareConfig and its not an assignambel parameter (Object literal may only specify known properties, but 'colour' does not exist in type 'SquareConfig'. )
-
-INDEXABLE TYPES
-interface StringArray {
-    [index: number]: string;//index signature which states when a StringArray is indexed as number, it will return a String
-}
-let myArray: StringArray;
-myArray = ["Bob", "Fred"];
-
-let myStr: string = myArray[0];
-
-
-CLASSES:
-class Greeter {
-    greeting: string;//property
-    constructor(message: string) {
-        this.greeting = message;
-    }
-    greet(){
-        //method
-        return "Hello, " + this.greeting;
-    }
-}
-let greeter = new Greeter("world");//Instance of the Greeter class that calls the constructor , creating a new object with greeter shape and running the constructor to initialize it
-
-Simple Example of Inheritance
-class Animal {
-    move(distanceInMeters: number = 0){
-        console.log(`Animal moved ${distanceInMeters}`)
-    }
-}
-class Dog extends Animal {
-    bark(){
-        console.log('Woof! Woof!');
-    }
-}
-const dog = new Dog();
-dog.bark();
-dog.move(10);
-dog.bark();
-
-Snippet 2:
-class Animal {
-    name: string;
-    constructor(theName: string){
-        this.name = theName;
-    }
-    move(distanceInMeters: number = 0){
-        console.log(`${this.name} moved ${distanceInMeters}m.`);
-    }
-}
-class Snake extends Animal {
-    constructor(name: String){
-        super(name);
-    }
-    move(distanceInMeters = 5){
-        console.log("Slithering...");
-        super.move(distanceInMeters);
-    }
-}
-class Horse extends Animal {
-    constructor(name: String){
-        super(name);//Error
-    }
-    move(distanceInMeters = 45){
-        console.log("Galloping...");
-        super.move(distanceInMeters);
-    }
-}
-let sam = new Snake("Sammy the Python");
-let tom: Animal = new Horse("Tommy the Palomino");
-
-sam.move();
-tom.move(34);
-
-Snippet 3:
-class Person {
-    protected name: string;
-    constructor(name: string) {
-        this.name = name;
-    }
-}
-class Employee extends Person {
-    private department: string;
-    constructor(name: string, department:string){
-        super(name);
-        this.department = department;
-    }
-    public getElevatorPitch(){
-        return `Hello, my name is ${this.name} and I work in ${this.department}`;
-    }
-}
-let howard = new Employee("Howard", "Sales");
-console.log(howard.getElevatorPitch());
-
-Snippet 4:
-/*abstract class Abcd {
-
-    show() {
-        console.log('xyz');
-    }
-    abstract display();
-}
-class Xyz extends Abcd {
-   
-     display(){
-        console.log('abcd');
-     }
-}
-let x = new Xyz();
-x.display();
-x.show();*/
-
-
-Snippet6:
-class Shape {
-    name: string;
-    constructor(n){
-        this.name = n;
-    }
-    display() {
-        console.log(this.name);
-        
-    }
-}
-class Rectangle extends Shape {
-    length: number;
-    breadth: number;
-    constructor(l,b){
-        super('Rectangle')
-        this.length = l;
-        this.breadth = b;
-    }
-    display() {
-        console.log('I am a Rectangle')
-    }
-    
-}
-class MessageService {
-    static message;
-    name: string = 'abcd';
-    constructor (message, name){
-        MessageService.message = message;
-        this.name = name;
-    }
-    showMessage() {
-        console.log(`my message is ${MessageService.message}`);
-    }
-}
-let msg = new MessageService('message123', 'xyz');
-console.log(msg.name);//xyz
-msg.showMessage();//my message is message123
-let message = new MessageService('abcdefgh', 'xyzbc');
-console.log(message.name);//xyzbc
-message.showMessage();//my mssage is abcdefgh
-msg.showMessage();//my message is message123
-/*
-let rect = new Rectangle(2,1);
-console.log(rect.breadth);
-console.log(rect.length)
-console.log(rect.name);
-rect.display();
-
-let shape : Shape = rect;
-shape.display();
-let shape2 : Shape = new Shape('Shape');
-shape2.display();
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*interface Abcd {
-    name: string;
-    display(length: number, breadth: number);
-    show();
-}
-interface Xyz {
-    rank: number;
-}
-
-class Square implements Abcd, Xyz {
-    name: string;
-    rank: number;
-    display (length: number, breadth: number) {
-        console.log(`abcd`)
-    }
-    show(){
-
-    }
-}*/
-
-
-
-
-
-
-
+ 
