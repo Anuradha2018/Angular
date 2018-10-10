@@ -1,10 +1,6 @@
-<div>
- 
+<ul *ngFor="let item of items" class="col-1-4" routerLink="/todo">
+      <h4>{{item.title}}</h4>
+      <h5>{{item.completed}}</h5>
+      <h5>{{item.createdOn}}</h5>
+  </ul>
 
-
-<button (click) = "getTodo()">Show</button>
-<div>
-    Todo Items:
-  {{items.title}}
-</div>
-</div>
