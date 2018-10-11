@@ -1,14 +1,14 @@
   <table class= "common">
+    <thead>
     <tr>
       <th>Title</th>
       <th>Status</th>
       <th>Created on</th>
     </tr>
-  </table>
-  <table *ngFor="let item of items" class="common" routerLink="/todo">
+  </thead>
     
-    <tr>
-      <td>{{item.title}}</td>
+    <tr *ngFor="let item of items">
+      <td routerLink="/todo">{{item.title}}</td>
       <td>{{item.completed}}</td>
       <td>{{item.createdOn}}</td>
     </tr>
