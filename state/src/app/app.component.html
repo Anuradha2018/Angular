@@ -1,0 +1,188 @@
+<p>My current hero is {{currentHero.name}}</p>
+
+<h3>
+  {{title}}
+  <img src="{{heroImageUrl}}" style="height:130px; width: 130px">
+</h3>
+
+<p>The sum of 1 + 1 is {{1 + 1}}</p>
+
+<p>The sum of 1 + 1 is not {{1 + 1 + getVal()}}</p>
+
+<span [hidden]="isUnchanged">changed</span>
+
+<div *ngFor="let hero of heroes">{{hero.name}}</div>
+<input #heroInput> {{heroInput.value}}
+
+<button (click)="deleteHero()">Delete hero</button>
+<br>
+<button (click)="onSave($event)">Save</button><br>
+<button *ngFor="let hero of heroes" (click)="deleteHero(hero)">{{hero.name}}</button>
+<form #heroForm (ngSubmit)="onSubmit(heroForm)"> ... </form>
+
+<h4>A new mental model</h4>
+<div class="special">Mental Model</div>
+<img src="assets/heroImage.jpg" style="height:130px; width: 130px">
+<button disabled>Save</button>
+
+
+<div class="special">Mental Model</div>
+
+<!--Not working <app-hero-detail [hero]="currentHero"></app-hero-detail>--> 
+
+<div [ngClass]="{special: isSpecial}">[ngClass] binding to the classes property</div>
+
+<p><img src="{{heroImageUrl}}"> is the <i>interpolated</i> image.</p>
+<p><img [src]="heroImageUrl"> is the <i>property bound</i> image.</p>
+
+<p><span>"{{title}}" is the <i>interpolated</i> title.</span></p>
+<p>"<span [innerHTML]="title"></span>" is the <i>property bound</i> title.</p>
+
+<!--Error-->
+<!--<tr><td colspan="{{1 + 1}}">Three-Four</td></tr>-->
+<!--Correct Method-->
+<table border=1> 
+  <tr><td [attr.colspan]="1 + 1">One-Two</td></tr>
+  <tr><td>Five</td><td>Six</td></tr>
+</table>
+<br> <br>
+
+<button [attr.aria-label]="actionName">{{actionName}} with Aria</button>
+<br> <br>
+<!--CLASS BINDING-->
+<div class="bad curly special">Bad curly special</div>
+<br> <br>
+<div class="bad curly special"
+     [class]="badCurly">Bad curly</div><!-- I think overriding takes place, So justthe content is being displayed without any CSS being applied-->
+     <br> <br>       
+     <!--Toggling the special class by giving isSpecial a boolean value-->
+     <div [class.special]="isSpecial">The class binding is special</div>
+     <br> <br>
+<!--Class.special is the class attribute-->
+     <div class="special"
+     [class.special]="!isSpecial">This one is not so special</div>
+     <br> <br>
+ <!--STYLE BINDING-->
+ <button [style.color]="isSpecial ? 'red': 'green'">Red</button>
+<button [style.background-color]="canSave ? 'cyan': 'grey'" >Save</button>  
+<br> <br>  
+<button [style.font-size.em]="isSpecial ? 3 : 1" >Big</button>
+<button [style.font-size.%]="!isSpecial ? 150 : 50" >Small</button>
+<br> <br>  
+<!--EVENT BINDING-->
+<button (click)="onSave()">Save</button><!--Target event- click, -->
+<br> <br> 
+<button on-click="onSave()">On Save</button> <!--on before click gives canonical it a form-->
+<br> <br> 
+<!-- `myClick` is an event on the custom `ClickDirective` -->
+<div (myClick)="clickMessage=$event" clickable>click with myClick</div>
+<!--here the $event is a DOM event object with properties such as target and target.value.-->
+<input [value]="currentHero.name"
+       (input)="currentHero.name=$event.target.value" > <!--(input) is an event-->
+
+      
+ <!--Instead of  <app-hero-detail></app-hero-detail>-->
+ <h1>OUTPUT</h1>
+ <app-hero-detail (deleteRequest)="deleteHero($event)" [hero]="currentHero"></app-hero-detail>
+ 
+ <br> <br>
+ <!--two Way: type 1:  The revised AppComponent.fontSizePx value flows through to the style binding, making the displayed text bigger or smaller.-->
+ <app-sizer [(size)]="fontSizePx"></app-sizer>
+<div [style.font-size.px]="fontSizePx">Resizable Text</div>
+<br> <br>
+ <!--Two Way: type 2: The $event variable contains the payload of the SizerComponent.sizeChange event. Angular assigns the $event value to the AppComponent.fontSizePx when the user clicks the buttons.-->
+<app-sizer [size]="fontSizePx" (sizeChange)="fontSizePx=$event"></app-sizer>
+<br> <br>
+<!--Adding an ngClass property binding to currentClasses sets the element's classes accordingly:-->
+<button (click)="setCurrentClasses()">Refresh currentClasses</button>
+<div [ngClass]="currentClasses">This div is initially saveable, unchanged, and special</div>
+
+<br> <br>
+
+<!--NgStyle-->
+<div [style.font-size]="isSpecial ? 'x-large' : 'smaller'" >
+  This div is x-large or smaller.
+</div>
+<button (click)="setCurrentStyles()">Refresh currentStyles</button>
+<div [ngStyle]="currentStyles">
+  This div is initially italic, normal weight, and extra large (24px).
+</div>
+<br> <br>
+<!--NgModel - Two-way binding to form elements with [(ngModel)]-->
+<input [(ngModel)]="currentHero.name">
+<br> <br>
+<input [value]="currentHero.name"
+       (input)="currentHero.name=$event.target.value" ><!--here value is property and input is event-->
+       <br> <br>
+<input
+       [ngModel]="currentHero.name"
+       (ngModelChange)="currentHero.name=$event">   
+       <br> <br>
+      
+<input
+       [ngModel]="currentHero.name"
+       (ngModelChange)="setUppercaseName($event)"> 
+       <br> <br>
+<!--STRUCTURAL DIRECTIVES-->
+<app-hero-detail *ngIf="isActive"></app-hero-detail>  <!--When isActive is true the hero-detail component is added to the DOM-->
+<!--With Class and Style Binding-->
+<div [class.hidden]="!isSpecial">Show with class</div>
+<div [class.hidden]="isSpecial">Hide with class</div>
+
+<div [style.display]="isSpecial ? 'block' : 'none'">Show with style</div>
+<div [style.display]="isSpecial ? 'none'  : 'block'">Hide with style</div>   
+<br> <br>
+<!--Guard against null-->
+<div *ngIf="currentHero">Hello, {{currentHero.name}}</div>
+<div *ngIf="nullHero">Hello, {{nullHero.name}}</div>
+<br> <br>
+<!--Repeater Directive-->
+<div *ngFor="let hero of heroes">{{hero.name}}</div>
+<br> <br>
+<div *ngFor="let hero of heroes; let i=index">{{i + 1}} - {{hero.name}}</div>
+<br> <br>
+<!--*ngFor with trackBy-->
+<div *ngFor="let hero of heroes; trackBy: trackByHeroes">
+  ({{hero.id}}) {{hero.name}}
+</div>
+<br> <br>
+<!--The NgSwitch directives: Need to discuss-->
+
+
+<!--Template reference variables-->
+<input #phone placeholder="phone number">
+<button (click)="callPhone(phone.value)">Call</button>
+<br> <br>
+<!--How a reference variable gets its value-->
+
+<input ref-fax placeholder="fax number">
+<button (click)="callFax(fax.value)">Fax</button>
+<br> <br>
+<!--Input and Output properties-->
+<br> <br>
+<!--The pipe operator ( | )-->
+<div>Title through uppercase pipe: {{title | uppercase}}</div>
+<br> <br>
+<!--Pipe Chaining-->
+<div>
+  Title through a pipe chain:
+  {{title | uppercase | lowercase}}
+</div>
+<!--Pipe with argument-->
+<div>Birthdate: {{currentHero?.birthdate | date:'longDate'}}</div>
+
+<div>{{currentHero | json}}</div>
+The current hero's name is {{currentHero?.name}}
+<br> <br>
+<!--No hero, div not displayed, no error -->
+<div *ngIf="nullHero">The null hero's name is {{nullHero.name}}</div>
+<!--No hero, no text -->
+<div *ngIf="hero">
+  The hero's name is {{hero!.name}}
+</div>
+<br> <br>
+<!--error free-->
+<!-- Accessing an undeclared member -->
+<div>
+  Undeclared members is {{$any(this).member}}
+</div>

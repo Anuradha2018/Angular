@@ -1,0 +1,20 @@
+.special {
+    color: blueviolet;
+    font-weight: bold;
+    font-size: 25px;
+}
+.bad {
+    font-weight: bold;
+}
+.curly {
+    font-style: italic;
+}
+.saveable {
+    background-color: deepskyblue
+}
+.modified {
+    align-content:center;
+}
+.hidden {
+    display: none;
+}
